@@ -2,87 +2,87 @@
 //associate to Rubik's Cube notation for faces and rotation
 
 //rotations
-const int U = 0;
-const int UI = 1;
-const int U2 = 2;
+#define U 0
+#define UI 1
+#define U2 2
 
-const int D = 3;
-const int DI = 4;
-const int D2 = 5;
+#define D 3
+#define DI 4
+#define D2 5
 
-const int R = 6;
-const int RI = 7;
-const int R2 = 8;
+#define R 6
+#define RI 7
+#define R2 8
 
-const int L = 9;
-const int LI = 10;
-const int L2 = 11;
+#define L 9
+#define LI 10
+#define L2 11
 
-const int F = 12;
-const int FI = 13;
-const int F2 = 14;
+#define F 12
+#define FI 13
+#define F2 14
 
-const int B = 15;
-const int BI = 16;
-const int B2 = 17;
+#define B 15
+#define BI 16
+#define B2 17
 
-const int M = 18;
-const int MI = 19;
-const int M2 = 20;
+#define M 18
+#define MI 19
+#define M2 20
 
-const int E = 21;
-const int EI = 22;
-const int E2 = 23;
+#define E 21
+#define EI 22
+#define E2 23
 
-const int S = 24;
-const int SI = 25;
-const int S2 = 26;
+#define S 24
+#define SI 25
+#define S2 26
 
-const int X = 27;
-const int XI = 28;
-const int X2 = 29;
+#define X 27
+#define XI 28
+#define X2 29
 
-const int Y = 30;
-const int YI = 31;
-const int Y2 = 32;
+#define Y 30
+#define YI 31
+#define Y2 32
 
-const int Z = 33;
-const int ZI = 34;
-const int Z2 = 35;
+#define Z 33
+#define ZI 34
+#define Z2 35
 
 //center positions
-const int POS_U = 0;
-const int POS_D = 1;
-const int POS_R = 2;
-const int POS_L = 3;
-const int POS_F = 4;
-const int POS_B = 5;
+#define POS_U 0
+#define POS_D 1
+#define POS_R 2
+#define POS_L 3
+#define POS_F 4
+#define POS_B 5
 
 //edge positions
-const int POS_UB = 0;
-const int POS_UR = 1;
-const int POS_FU = 2;
-const int POS_LU = 3;
-const int POS_RF = 4;
-const int POS_BR = 5;
-const int POS_LB = 6;
-const int POS_FL = 7;
-const int POS_DF = 8;
-const int POS_RD = 9;
-const int POS_BD = 10;
-const int POS_DL = 11;
+#define POS_UB 0
+#define POS_UR 1
+#define POS_FU 2
+#define POS_LU 3
+#define POS_RF 4
+#define POS_BR 5
+#define POS_LB 6
+#define POS_FL 7
+#define POS_DF 8
+#define POS_RD 9
+#define POS_BD 10
+#define POS_DL 11
 
 //corner positions
-const int POS_UBR = 0;
-const int POS_URF = 1;
-const int POS_UFL = 2;
-const int POS_ULB = 3;
-const int POS_DBL = 4;
-const int POS_DLF = 5;
-const int POS_DFR = 6;
-const int POS_DRB = 7;
+#define POS_UBR 0
+#define POS_URF 1
+#define POS_UFL 2
+#define POS_ULB 3
+#define POS_DBL 4
+#define POS_DLF 5
+#define POS_DFR 6
+#define POS_DRB 7
 
 //types of cubies
-const int CENTER = 0;
-const int EDGE = 1;
-const int CORNER = 2;
+#define CENTER 0
+#define EDGE 1
+#define CORNER 2
