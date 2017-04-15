@@ -3,6 +3,7 @@
 #include <iostream>
 #include "CubeConstants.h"
 #include "CubePrinter.hpp"
+#include "CubeSolver.cpp"
 #include "Cube.cpp"
 
 //cube net layout:
@@ -151,20 +152,49 @@ bool CubePrinter::inputRotation() {
 
 	if(input == "ESC") {
 		return false;
-	}
-
-	int inputRotationValue = rotationFromString(input);
-
-	if(inputRotationValue >= 0) {
-		rubiksCube.rotate(inputRotationValue);
+	} else if(input == "MULT") {
+		inputMultipleRotations();
+	} else if(input == "SOLVE") {
+		rubiksCube.replaceWithCube(solvePuzzle(rubiksCube));
 	} else {
-		cout << "INVALID INPUT" << endl;
-		inputRotation();
+		int inputRotationValue = rotationFromString(input);
+
+		if(inputRotationValue >= 0) {
+			rubiksCube.rotate(inputRotationValue);
+		} else {
+			cout << "INVALID INPUT" << endl;
+			inputRotation();
+		}
 	}
 
 	updateCube();
 	cout << endl << endl;
 	return true;
+}
+
+void CubePrinter::inputMultipleRotations() {
+	string input = "";
+	cout << "Input multiple rotations: ";
+	cin >> input;
+
+	for(int i = 0; i < input.length(); i++) {
+		string rotation = "";
+		if(input[i] == 'U' || input[i] == 'D' || input[i] == 'R' || input[i] == 'L' || 
+			input[i] == 'F' || input[i] == 'B' || input[i] == 'M' || input[i] == 'E' ||
+			input[i] == 'S' || input[i] == 'X' || input[i] == 'Y' || input[i] == 'Z') {
+
+			rotation += input[i];
+
+			if(i + 1 < input.length() && (input[i + 1] == 'i' || input[i + 1] == '2')) {
+				rotation += input[i + 1];
+				i++;
+			}
+
+			rubiksCube.rotate(rotationFromString(rotation));
+		} else if(input[i] != ' ') {
+			cout << endl << "INVALID INPUT AT CHAR " << i;
+		}
+	}
 }
 
 int CubePrinter::rotationFromString(string input) {
@@ -177,6 +207,13 @@ int CubePrinter::rotationFromString(string input) {
 	}
 	
 	return -1;
+}
+
+Cube CubePrinter::solvePuzzle(Cube scrambledCube) {
+	CubeSolver solver = CubeSolver(scrambledCube);
+	solver.solveFullCube();
+	cout << endl << solver.getSolutionNotation() << endl;
+	return solver.getSolvedCube();
 }
 
 int main(int argc, char const *argv[])

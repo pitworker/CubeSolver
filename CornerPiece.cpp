@@ -62,6 +62,13 @@ void CornerPiece::set(int positionOnCube, int orientationOfCubie, char colorOfFa
 		}
 	}
 }
+void CornerPiece::set(CornerPiece piece) {
+	position = piece.getPositionOnCube();
+	orientation = piece.getOrientation();
+	for(int i = 0; i < 3; i++) {
+		color[i] = piece.getColorWithoutOrientation(i);
+	}
+}
 
 char CornerPiece::setColor(int faceOfCubie, char colorOfFace) {
 	if(faceOfCubie >= 0 && faceOfCubie < 3) {
@@ -112,6 +119,12 @@ char CornerPiece::getColor(int faceOfCubie) {
 	}
 	return 'X';
 }
+char CornerPiece::getColorWithoutOrientation(int faceOfCubie) {
+	if(faceOfCubie >= 0 && faceOfCubie < 3) {
+		return color[faceOfCubie];
+	}
+	return 'X';
+}
 int CornerPiece::getPositionOnCube() {
 	return position;
 }
@@ -120,20 +133,20 @@ int CornerPiece::getOrientation() {
 }
 
 bool CornerPiece::isOnFaceOfCube(int faceOfCube) {
-	if(faceOfCube == U && position >= POS_UBR && position <= POS_ULB) {
+	if(faceOfCube == POS_U && position >= POS_UBR && position <= POS_ULB) {
 		return true;
-	} else if(faceOfCube == D && position >= POS_DBL && position <= POS_DRB) {
+	} else if(faceOfCube == POS_D && position >= POS_DBL && position <= POS_DRB) {
 		return true;
-	} else if(faceOfCube == R && (position == POS_UBR || position == POS_URF || 
+	} else if(faceOfCube == POS_R && (position == POS_UBR || position == POS_URF || 
 		position == POS_DFR || position == POS_DRB)) {
 		return true;
-	} else if(faceOfCube == L && (position == POS_UFL || position == POS_ULB || 
+	} else if(faceOfCube == POS_L && (position == POS_UFL || position == POS_ULB || 
 		position == POS_DBL || position == POS_DLF)) {
 		return true;
-	} else if(faceOfCube == B && (position == POS_UBR || position == POS_ULB || 
+	} else if(faceOfCube == POS_B && (position == POS_UBR || position == POS_ULB || 
 		position == POS_DBL || position == POS_DRB)) {
 		return true;
-	} else if(faceOfCube == F && (position == POS_URF || position == POS_UFL || 
+	} else if(faceOfCube == POS_F && (position == POS_URF || position == POS_UFL || 
 		position == POS_DLF || position == POS_DFR)) {
 		return true;
 	}
@@ -176,3 +189,5 @@ void CornerPiece::rotateCubie(int rotateDirection) {
 		mutateOrientation(getTargetOrientation(rotateDirection));
 	}
 }
+
+bool CornerPiece::hasColor()

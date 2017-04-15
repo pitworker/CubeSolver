@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "CubeConstants.h"
+#include "CubeSolver.cpp"
 #include "Cube.cpp"
 class CubePrinter {
 private:
@@ -36,5 +37,9 @@ public:
 	void printCubeNet();
 	bool inputRotation();
 
+	void inputMultipleRotations();
+
 	int rotationFromString(string input);
+
+	Cube solvePuzzle(Cube scrambledCube);
 };

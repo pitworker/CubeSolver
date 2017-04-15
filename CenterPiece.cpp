@@ -43,6 +43,11 @@ void CenterPiece::set(int positionOnCube, char colorOfFace) {
 		default: color = '.'; break;
 	}
 }
+void CenterPiece::set(CenterPiece piece) {
+	position = piece.getPositionOnCube();
+	orientation = piece.getOrientation();
+	color = piece.getColor(0);
+}
 
 char CenterPiece::setColor(int faceOfCubie, char colorOfFace) {
 	if(faceOfCubie == 0) {
@@ -89,7 +94,7 @@ int CenterPiece::getOrientation() {
 }
 
 bool CenterPiece::isOnFaceOfCube(int faceOfCube) {
-	if(position * 3 == faceOfCube) {
+	if(position == faceOfCube) {
 		return true;
 	}
 	return false;

@@ -14,7 +14,8 @@ public:
 	CenterPiece(int positionOnCube, char colorOfFace);
 	
 	void set(int positionOnCube, char colorOfFace);
-	
+	void set(CenterPiece piece);
+
 	char setColor(int faceOfCubie, char colorOfFace);
 	int setPositionOnCube(int positionOnCube);
 	int setOrientation(int orientationOfCubie);

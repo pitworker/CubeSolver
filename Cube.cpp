@@ -79,4 +79,50 @@ public:
 		}
 		return CornerPiece();
 	}
+
+	void setCenterPieceAtPosition(int position, CenterPiece pieceToSetTo) {
+		for(int i = 0; i < 6; i++) {
+			if(centerPiece[i].getPositionOnCube() == position) {
+				centerPiece[i].set(pieceToSetTo);
+				break;
+			}
+		}
+	}
+	void setEdgePieceAtPosition(int position, EdgePiece pieceToSetTo) {
+		for(int i = 0; i < 12; i++) {
+			if(edgePiece[i].getPositionOnCube() == position) {
+				edgePiece[i].set(pieceToSetTo);
+				break;
+			}
+		}
+	}
+	void setCornerPieceAtPosition(int position, CornerPiece pieceToSetTo) {
+		for(int i = 0; i < 8; i++) {
+			if(cornerPiece[i].getPositionOnCube() == position) {
+				cornerPiece[i].set(pieceToSetTo);
+				break;
+			}
+		}
+	}
+	
+	void replaceWithCube(Cube cube) {
+		for(int i = 0; i < 6; i++) {
+			setCenterPieceAtPosition(i, cube.getCenterPieceAtPosition(i));
+		}
+		for(int i = 0; i < 12; i++) {
+			setEdgePieceAtPosition(i, cube.getEdgePieceAtPosition(i));
+		}
+		for(int i = 0; i < 8; i++) {
+			setCornerPieceAtPosition(i, cube.getCornerPieceAtPosition(i));
+		}
+	}
+
+	int getPositionOfCenterPieceWithColor(char color) {
+		for(int i = 0; i < 6; i++) {
+			if(getCenterPieceAtPosition(i).getColor(0) == color) {
+				return i;
+			}
+		}
+		return -1;
+	}
 };

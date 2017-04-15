@@ -62,6 +62,13 @@ void EdgePiece::set(int positionOnCube, int orientationOfCubie, char colorOfFace
 		}
 	}
 }
+void EdgePiece::set(EdgePiece piece) {
+	position = piece.getPositionOnCube();
+	orientation = piece.getOrientation();
+	for(int i = 0; i < 2; i++) {
+		color[i] = piece.getColorWithoutOrientation(i);
+	}
+}
 
 char EdgePiece::setColor(int faceOfCubie, char colorOfFace) {
 	if(faceOfCubie == 0 || faceOfCubie == 1) {
@@ -108,6 +115,12 @@ char EdgePiece::getColor(int faceOfCubie) {
 	}
 	return 'X';
 }
+char EdgePiece::getColorWithoutOrientation(int faceOfCubie){
+	if(faceOfCubie == 0 || faceOfCubie == 1) {
+		return color[faceOfCubie];
+	}
+	return 'X';
+}
 int EdgePiece::getPositionOnCube() {
 	return position;
 }
@@ -116,20 +129,20 @@ int EdgePiece::getOrientation() {
 }
 
 bool EdgePiece::isOnFaceOfCube(int faceOfCube) {
-	if(faceOfCube == U && position >= POS_UB && position <= POS_LU) {
+	if(faceOfCube == POS_U && position >= POS_UB && position <= POS_LU) {
 		return true;
-	} else if(faceOfCube == D && position >= POS_DF && position <= POS_DL) {
+	} else if(faceOfCube == POS_D && position >= POS_DF && position <= POS_DL) {
 		return true;
-	} else if(faceOfCube == R && (position == POS_UR || position == POS_RF || 
+	} else if(faceOfCube == POS_R && (position == POS_UR || position == POS_RF || 
 		position == POS_BR || position == POS_RD)) {
 		return true;
-	} else if(faceOfCube == L && (position == POS_DL || position == POS_LU || 
+	} else if(faceOfCube == POS_L && (position == POS_DL || position == POS_LU || 
 		position == POS_LB || position == POS_FL)) {
 		return true;
-	} else if(faceOfCube == B && (position == POS_LB || position == POS_BR || 
+	} else if(faceOfCube == POS_B && (position == POS_LB || position == POS_BR || 
 		position == POS_UB || position == POS_BD)) {
 		return true;
-	} else if(faceOfCube == F && (position == POS_FL || position == POS_RF || 
+	} else if(faceOfCube == POS_F && (position == POS_FL || position == POS_RF || 
 		position == POS_FU || position == POS_DF)) {
 		return true;
 	}
@@ -169,4 +182,8 @@ void EdgePiece::rotateCubie(int rotateDirection) {
 		setPositionOnCube(getTargetPosition(rotateDirection));
 		mutateOrientation(getTargetOrientation(rotateDirection));
 	}
+}
+
+bool EdgePiece::hasColor(char colorOfFace) {
+	return(color[0] == colorOfFace || color[1] == colorOfFace);
 }
