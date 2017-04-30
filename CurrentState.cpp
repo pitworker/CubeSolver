@@ -13,9 +13,18 @@ public:
 		algorithm = rotations;
 	}
 
+	CurrentState(Cube cube) {
+		currentCube.replaceWithCube(cube);
+	}
+
 	int getLastRotation() {
 		return algorithm[algorithm.back()];
 	}
+
+	int getLengthOfSolution() {
+		return algorithm.size();
+	}
+	
 	Cube getCube() {
 		return currentCube;
 	}
@@ -24,6 +33,15 @@ public:
 		Cube newCube;
 		newCube.replaceWithCube(currentCube);
 
-		return CurrentState(newCube.rotate(rotation), algorithm.push_back(rotation));
+		newCube.rotate(rotation);
+
+		vector<int> newAlgorithm = algorithm;
+		newAlgorithm.push_back(rotation);
+
+		return CurrentState(newCube, newAlgorithm);
+	}
+
+	vector<int> getSolution() {
+		return algorithm;
 	}
 };

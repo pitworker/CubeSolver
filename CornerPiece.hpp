@@ -35,5 +35,7 @@ public:
 
 	void rotateCubie(int rotateDirection);
 
-	bool hasColor(char colorOfFace);
+	//bool hasColor(char colorOfFace);
+
+	int getFaceWithColor(char colorOfFace);
 };

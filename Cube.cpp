@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include "CubeConstants.h"
+//#include "RelatedColors.h"
 #include "CenterPiece.cpp"
 #include "EdgePiece.cpp"
 #include "CornerPiece.cpp"
@@ -125,4 +126,25 @@ public:
 		}
 		return -1;
 	}
+
+	/*void shiftCubeColors(int shiftIndex) {
+		if(shiftIndex >= 0 && shiftIndex < 24) {
+			for(int i = 0; i < 6; i++) {
+				centerPiece[i].setColor(0, 
+					RELATED_COLORS[shiftIndex][indexOfColor(centerPiece[i].getColor(0))]);
+			}
+			for(int i = 0; i < 12; i++) {
+				for(int j = 0; j < 2; j++) {
+					edgePiece[i].setColor(j, 
+						RELATED_COLORS[shiftIndex][indexOfColor(edgePiece[i].getColorWithoutOrientation(j))]);
+				}
+			}
+			for(int i = 0; i < 8; i++) {
+				for(int j = 0; j < 3; j++) {
+					cornerPiece[i].setColor(j, 
+						RELATED_COLORS[shiftIndex][indexOfColor(cornerPiece[i].getColorWithoutOrientation(j))]);
+				}
+			}
+		}
+	}*/
 };

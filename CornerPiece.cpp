@@ -190,4 +190,13 @@ void CornerPiece::rotateCubie(int rotateDirection) {
 	}
 }
 
-bool CornerPiece::hasColor()
+int CornerPiece::getFaceWithColor(char colorOfFace) {
+	for(int i = 0; i < 3; i++) {
+		if(color[i] == colorOfFace) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+//bool CornerPiece::hasColor()

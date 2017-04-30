@@ -184,6 +184,11 @@ void EdgePiece::rotateCubie(int rotateDirection) {
 	}
 }
 
-bool EdgePiece::hasColor(char colorOfFace) {
-	return(color[0] == colorOfFace || color[1] == colorOfFace);
+int EdgePiece::getFaceWithColor(char colorOfFace) {
+	for(int i = 0; i < 2; i++) {
+		if(color[i] == colorOfFace) {
+			return i;
+		}
+	}
+	return -1;
 }
