@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Cube.cpp"
 
 //cube net layout:
@@ -37,7 +38,10 @@ private:
 	bool relatedCaseMatches(Cube cube);
 
 public:
+	PreviousState();
 	PreviousState(Cube cube);
 
-	bool matchesCube(Cube cube);	
+	bool matchesCube(Cube cube);
+	
+	void replaceWith(PreviousState other);	
 };

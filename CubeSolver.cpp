@@ -10,7 +10,8 @@ bool CubeSolver::solveCube() {
 	while(!stateIsSolved(currentStates.front()) && currentStates.front().getLengthOfSolution() < 30) {
 		for(int i = 0; i < 27; i++) {
 			if(!rotationIsRedundant(currentStates.front(), i)) {
-				CurrentState newState = currentStates.front().stateAfterRotating(i);
+				CurrentState newState;
+				newState.replaceWith(currentStates.front().stateAfterRotating(i));
 				if(!stateWasAlreadyVisited(newState)) { //TODO: write stateWasAlreadyVisited()
 					currentStates.push_back(newState);
 				}
@@ -42,7 +43,8 @@ Cube CubeSolver::getSolvedCube() {
 }
 
 bool CubeSolver::stateIsSolved(CurrentState state) {
-	PreviousState solvedCube = PreviousState(Cube());
+	PreviousState solvedCube;
+	solvedCube.replaceWith(Cube());
 	return solvedCube.matchesCube(state.getCube()); //TODO: check to make sure matchesCube checks related cases as well
 }
 bool CubeSolver::rotationIsRedundant(CurrentState state, int currentRotation) {

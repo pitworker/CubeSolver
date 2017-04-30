@@ -12,6 +12,7 @@
 //    DDD
 //    DDD
 
+PreviousState::PreviousState() {}
 
 PreviousState::PreviousState(Cube cube) {
 	addCenters(cube);

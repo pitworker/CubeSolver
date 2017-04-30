@@ -8,6 +8,7 @@ private:
 	vector<int> algorithm;
 
 public: 
+	CurrentState(){}
 	CurrentState(Cube cube, vector<int> rotations) {
 		currentCube.replaceWithCube(cube);
 		algorithm = rotations;
@@ -43,5 +44,10 @@ public:
 
 	vector<int> getSolution() {
 		return algorithm;
+	}
+	
+	void replaceWith(CurrentState other) {
+		currentCube.replaceWithCube(other.getCube());
+		algorithm = other.getSolution();
 	}
 };

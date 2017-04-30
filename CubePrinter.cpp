@@ -211,7 +211,7 @@ int CubePrinter::rotationFromString(string input) {
 
 Cube CubePrinter::solvePuzzle(Cube scrambledCube) {
 	CubeSolver solver = CubeSolver(scrambledCube);
-	solver.solveFullCube();
+	solver.solveCube();
 	cout << endl << solver.getSolutionNotation() << endl;
 	return solver.getSolvedCube();
 }
