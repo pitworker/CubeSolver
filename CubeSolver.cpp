@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "CubeSolver.hpp"
 
 CubeSolver::CubeSolver(Cube scrambledCube) {
@@ -7,11 +8,22 @@ CubeSolver::CubeSolver(Cube scrambledCube) {
 
 bool CubeSolver::solveCube() {
 	currentStates.push_back(CurrentState(cubeToSolve));
+	
+	cout << currentStates.size() << endl;
+	cout << currentStates.front().getLengthOfSolution() << endl;
+	cout << previousStates.size() << endl;
+	if(stateIsSolved(currentStates.front())) {
+		cout << "solved" << endl;
+	} else {
+		cout << "not solved" << endl;
+	}
+
+	int statesVisited = 0;
+
 	while(!stateIsSolved(currentStates.front()) && currentStates.front().getLengthOfSolution() < 30) {
 		for(int i = 0; i < 27; i++) {
 			if(!rotationIsRedundant(currentStates.front(), i)) {
-				CurrentState newState;
-				newState.replaceWith(currentStates.front().stateAfterRotating(i));
+				CurrentState newState = currentStates.front().stateAfterRotating(i);
 				if(!stateWasAlreadyVisited(newState)) { //TODO: write stateWasAlreadyVisited()
 					currentStates.push_back(newState);
 				}
@@ -19,11 +31,26 @@ bool CubeSolver::solveCube() {
 					solution = newState.getSolution();
 					return true;
 				}
-				previousStates.push_back(PreviousState(currentStates.front().getCube()));
 			}
 		}
+		previousStates.push_back(PreviousState(currentStates.front().getCube()));
 		currentStates.erase(currentStates.begin());
+
+		statesVisited++;
+
+		cout << endl << "states visited " << statesVisited << endl;
+		cout << "currentStates.size() " << currentStates.size() << endl;
+		cout << "length of solution " << currentStates.front().getLengthOfSolution() << endl;
+		cout << "previousStates.size() " << previousStates.size() << endl;
+		cout << "cube is ";
+		if(stateIsSolved(currentStates.front())) {
+			cout << "solved" << endl;
+		} else {
+			cout << "not solved" << endl;
+		}
+
 	}
+
 	return false;
 }
 
@@ -43,14 +70,15 @@ Cube CubeSolver::getSolvedCube() {
 }
 
 bool CubeSolver::stateIsSolved(CurrentState state) {
-	PreviousState solvedCube;
-	solvedCube.replaceWith(Cube());
+	PreviousState solvedCube = PreviousState(Cube());
 	return solvedCube.matchesCube(state.getCube()); //TODO: check to make sure matchesCube checks related cases as well
 }
 bool CubeSolver::rotationIsRedundant(CurrentState state, int currentRotation) {
-	for(int i = 0; i < 5; i++) {
-		if(REDUNDANT_ROTATIONS[state.getLastRotation()][i] == currentRotation) {
-			return true; 
+	if(state.getLastRotation() >= 0) {
+		for(int i = 0; i < 5; i++) {
+			if(REDUNDANT_ROTATIONS[state.getLastRotation()][i] == currentRotation) {
+				return true; 
+			}
 		}
 	}
 	return false;
@@ -62,6 +90,10 @@ bool CubeSolver::stateWasAlreadyVisited(CurrentState state) {
 		}
 	}
 	return false;
+}
+
+CubeSolver& CubeSolver::operator = (Cube cube) {
+	cubeToSolve = cube;
 }
 
 

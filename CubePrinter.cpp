@@ -210,10 +210,14 @@ int CubePrinter::rotationFromString(string input) {
 }
 
 Cube CubePrinter::solvePuzzle(Cube scrambledCube) {
-	CubeSolver solver = CubeSolver(scrambledCube);
-	solver.solveCube();
-	cout << endl << solver.getSolutionNotation() << endl;
-	return solver.getSolvedCube();
+	CubeSolver solver = scrambledCube;
+	if(solver.solveCube()) {
+		cout << endl << solver.getSolutionNotation() << endl;
+		return solver.getSolvedCube();
+	} else {
+		cout << endl << "CubeSolver failed to solve cube" << endl;
+		return scrambledCube;
+	}
 }
 
 int main(int argc, char const *argv[])

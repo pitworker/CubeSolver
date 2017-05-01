@@ -5,6 +5,7 @@
 #include "CenterPiece.cpp"
 #include "EdgePiece.cpp"
 #include "CornerPiece.cpp"
+using namespace std;
 
 class Cube {
 private: 
@@ -125,6 +126,18 @@ public:
 			}
 		}
 		return -1;
+	}
+
+	Cube& operator = (Cube cube) {
+		for(int i = 0; i < 6; i++) {
+			setCenterPieceAtPosition(i, cube.getCenterPieceAtPosition(i));
+		}
+		for(int i = 0; i < 12; i++) {
+			setEdgePieceAtPosition(i, cube.getEdgePieceAtPosition(i));
+		}
+		for(int i = 0; i < 8; i++) {
+			setCornerPieceAtPosition(i, cube.getCornerPieceAtPosition(i));
+		}
 	}
 
 	/*void shiftCubeColors(int shiftIndex) {

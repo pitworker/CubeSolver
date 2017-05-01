@@ -1,5 +1,8 @@
 #pragma once
+#include <cstdlib>
+#include <iostream>
 #include <vector>
+#include "CubeConstants.h"
 #include "Cube.cpp"
 
 //cube net layout:
@@ -22,26 +25,29 @@ private:
 	char faceF [3][3];
 	char faceB [3][3];
 
-	void addCenters(Cube cube);
-	void addEdges(Cube cube);
-	void addCorners(Cube cube);
-
-	bool centersMatch(Cube cube);
-	bool cornersMatch(Cube cube);
-	bool edgesMatch(Cube cube);
-
-	bool firstSixEdgesMatch(Cube cube);
-	bool secondSixEdgesMatch(Cube cube);
 	
-	vector<Cube> matchingCases(Cube cube);
-	vector<Cube> mutatedCases(Cube cube);
-	bool relatedCaseMatches(Cube cube);
+		void addCenters(Cube cube);
+		void addEdges(Cube cube);
+		void addCorners(Cube cube);
+
+		bool centersMatch(Cube cube);
+		bool cornersMatch(Cube cube);
+		bool edgesMatch(Cube cube);
+
+		bool firstSixEdgesMatch(Cube cube);
+		bool secondSixEdgesMatch(Cube cube);
+		
+		vector<Cube> matchingCases(Cube cube);
+		vector<Cube> mutatedCases(Cube cube);
+		bool relatedCaseMatches(Cube cube);
 
 public:
 	PreviousState();
 	PreviousState(Cube cube);
 
 	bool matchesCube(Cube cube);
-	
-	void replaceWith(PreviousState other);	
+
+	char getColor(int face, int row, int col);
+
+	PreviousState& operator = (PreviousState other);	
 };

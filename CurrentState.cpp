@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Cube.cpp"
 
 class CurrentState {
@@ -19,10 +20,16 @@ public:
 	}
 
 	int getLastRotation() {
+		if(algorithm.empty()) {
+			return -1;
+		}
 		return algorithm[algorithm.back()];
 	}
 
 	int getLengthOfSolution() {
+		if(algorithm.empty()) {
+			return 0;
+		}
 		return algorithm.size();
 	}
 	
@@ -31,8 +38,7 @@ public:
 	}
 
 	CurrentState stateAfterRotating(int rotation) {
-		Cube newCube;
-		newCube.replaceWithCube(currentCube);
+		Cube newCube = currentCube;
 
 		newCube.rotate(rotation);
 
@@ -49,5 +55,9 @@ public:
 	void replaceWith(CurrentState other) {
 		currentCube.replaceWithCube(other.getCube());
 		algorithm = other.getSolution();
+	}
+
+	CurrentState& operator = (CurrentState other) {
+		replaceWith(other);
 	}
 };

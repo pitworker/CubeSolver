@@ -1,3 +1,7 @@
+#pragma once
+#include <cstdlib>
+#include <iostream>
+#include <vector>
 #include "RelatedColors.h"
 #include "PreviousState.hpp"
 
@@ -202,7 +206,9 @@ vector<Cube> PreviousState::matchingCases(Cube cube) {
 	vector<Cube> cases;
 	cases.push_back(cube);
 
-	cases.insert(cases.end(), mutatedCases(cube).begin(), mutatedCases(cube).end());
+	vector<Cube> mCases = mutatedCases(cube);
+
+	cases.insert(cases.end(), mCases.begin(), mCases.end());
 
 	return cases;
 }
@@ -293,4 +299,33 @@ bool PreviousState::relatedCaseMatches(Cube cube) {
 		}
 	}
 	return false;
+}
+
+char PreviousState::getColor(int face, int row, int col) {
+		switch(face) {
+			case POS_U : return faceU[row][col]; break;
+			case POS_D : return faceD[row][col]; break;
+			case POS_R : return faceR[row][col]; break;
+			case POS_L : return faceL[row][col]; break;
+			case POS_F : return faceF[row][col]; break;
+			case POS_B : return faceB[row][col]; break;
+			default : return 'X'; break;
+		}
+}
+
+PreviousState& PreviousState::operator = (PreviousState other) {
+	for(int i = 0; i < 6; i++) {
+		for(int r = 0; r < 3; r++) {
+			for(int c = 0; c < 3; c++) {
+				switch(i) {
+					case POS_U : faceU[r][c] = other.getColor(i,r,c); break;
+					case POS_D : faceD[r][c] = other.getColor(i,r,c); break;
+					case POS_R : faceR[r][c] = other.getColor(i,r,c); break;
+					case POS_L : faceL[r][c] = other.getColor(i,r,c); break;
+					case POS_F : faceF[r][c] = other.getColor(i,r,c); break;
+					case POS_B : faceB[r][c] = other.getColor(i,r,c); break;
+				}
+			}
+		}
+	}
 }

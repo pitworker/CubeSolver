@@ -48,6 +48,8 @@ public:
 	string getSolutionNotation();
 	Cube getSolvedCube();
 
+	CubeSolver& operator = (Cube cube);
+
 	//void setStartingFace();
 	//void orientFaceToFace(int faceToOrient, int targetFace);
 
