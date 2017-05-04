@@ -13,37 +13,38 @@ bool CubeSolver::solveCube() {
 	cout << currentStates.front().getLengthOfSolution() << endl;
 	cout << previousStates.size() << endl;
 	if(stateIsSolved(currentStates.front())) {
-		cout << "solved" << endl;
+		//cout << "solved" << endl;
 	} else {
-		cout << "not solved" << endl;
+		//cout << "not solved" << endl;
 	}
 
 	int statesVisited = 0;
 
 	while(!stateIsSolved(currentStates.front()) && currentStates.front().getLengthOfSolution() < 30) {
-		cout << endl << "visiting next state" << endl;
+		//cout << endl << "visiting next state" << endl;
 		for(short i = 0; i < 27; i++) {
-			cout << "rotation " << i;
+			//cout << "rotation " << i;
+			//cout << " last rotation " << currentStates.front().getLastRotation();
 			if(!rotationIsRedundant(currentStates.front(), i)) {
-				cout << " is not redundant |";
+				//cout << " is not redundant |";
 				CurrentState newState = currentStates.front().stateAfterRotating(i);
-				cout << " newState created";
+				//cout << " newState created";
 				if(!stateWasAlreadyVisited(newState)) {
-					cout << " newState not visited";
+					//cout << " newState not visited";
 					currentStates.push_back(newState);
-					cout << " newState added currentStates size " << currentStates.size();
+					//cout << " newState added currentStates size " << currentStates.size();
 				} else {
-					cout << " newState already visited";
+					//cout << " newState already visited";
 				}
 				if(stateIsSolved(newState)) {
-					cout << " cube is solved" << endl;
+					//cout << " cube is solved" << endl;
 					solution = newState.getSolution();
 					return true;
 				} else {
-					cout << " cube is not solved" << endl;
+					//cout << " cube is not solved" << endl;
 				}
 			} else {
-				cout << " is redundant" << endl;
+				//cout << " is redundant" << endl;
 			}
 		}
 		previousStates.push_back(PreviousState(currentStates.front().getCube()));
@@ -51,7 +52,7 @@ bool CubeSolver::solveCube() {
 
 		statesVisited++;
 
-		cout << "states visited " << statesVisited << endl;
+		cout << endl << "states visited " << statesVisited << endl;
 		cout << "currentStates.size() " << currentStates.size() << endl;
 		cout << "length of solution " << currentStates.front().getLengthOfSolution() << endl;
 		cout << "previousStates.size() " << previousStates.size() << endl;
@@ -87,7 +88,10 @@ bool CubeSolver::stateIsSolved(CurrentState state) {
 	return solvedCube.matchesCube(state.getCube()); //TODO: check to make sure matchesCube checks related cases as well
 }
 bool CubeSolver::rotationIsRedundant(CurrentState state, int currentRotation) {
-	if(state.getLastRotation() >= 0) {
+	if(state.getLastRotation() >= 27) {
+		//cout << endl << "ERROR" << endl;
+	}
+	else if(state.getLastRotation() >= 0) {
 		for(int i = 0; i < 5; i++) {
 			if(REDUNDANT_ROTATIONS[state.getLastRotation()][i] == currentRotation) {
 				return true; 

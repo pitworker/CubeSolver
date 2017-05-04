@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <vector>
 #include "Cube.cpp"
 
@@ -20,9 +21,12 @@ public:
 	}
 
 	int getLastRotation() {
-		if(algorithm.empty()) {
+		//cout << " getting lastRotation";
+		if(algorithm.empty() || algorithm.back() > 27) {
+			//cout << " there is no lastRotation";
 			return -1;
 		}
+		//cout << " - " << algorithm.back();
 		return algorithm[algorithm.back()];
 	}
 
